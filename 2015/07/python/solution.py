@@ -8,6 +8,8 @@ import fileinput
 
 
 def compute(wire, sig):
+    """Compute using dynamic programming and recursion."""
+
     op = wire[sig]
 
     if isinstance(op, int):
@@ -41,6 +43,8 @@ def compute(wire, sig):
 
 
 def circuit(booklet):
+    """Create a hashmap of the connections"""
+
     wire = {}
 
     for ins in booklet:
@@ -56,8 +60,12 @@ def main():
     booklet = [s.strip() for s in fileinput.input()]
 
     wire = circuit(booklet)
-    a = compute(wire, 'a')
-    print(a)
+    sig_a = compute(wire, 'a')
+    print(sig_a)
+
+    wire = circuit(booklet)
+    wire['b'] = sig_a
+    print(compute(wire, 'a'))
 
 
 if __name__ == "__main__":
