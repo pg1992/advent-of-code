@@ -24,12 +24,28 @@ def count_escaped(string):
     return count
 
 
+def encode_string(string):
+    """Encode string"""
+
+    s = '"'
+
+    for c in string:
+        if c in ['"', '\\']:
+            s += '\\'
+        s += c
+
+    return s + '"'
+
+
 def main():
     """Entrypoint"""
 
     words = [s.strip() for s in fileinput.input()]
 
     total = sum([len(w) - count_escaped(w) for w in words])
+    print('Total =', total)
+
+    total = sum([len(encode_string(w)) - len(w) for w in words])
     print('Total =', total)
 
 
