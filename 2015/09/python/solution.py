@@ -50,6 +50,7 @@ def main():
 
     ds = [dist(p, graph) for p in perms(places)]
     print(min(ds))
+    print(max(ds))
 
 
 if __name__ == "__main__":
