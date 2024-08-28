@@ -133,7 +133,7 @@ def satisfies_req_3(s):
 
 
 def is_valid_password(string):
-    """
+    """Check if all password requirements are met.
 
     >>> is_valid_password("hijklmmn")
     False
