@@ -11,7 +11,7 @@ import json
 import pprint
 
 
-def find_sum(json_doc):
+def find_sum(json_doc, ignore=False):
     """
     >>> find_sum(2)
     2
@@ -41,12 +41,14 @@ def find_sum(json_doc):
         return json_doc
     elif isinstance(json_doc, list):
         if json_doc:
-            return sum(find_sum(x) for x in json_doc)
+            return sum(find_sum(x, ignore) for x in json_doc)
         else:
             return 0
     elif isinstance(json_doc, dict):
         if json_doc:
-            return sum(find_sum(x) for x in json_doc.values())
+            if ignore and 'red' in json_doc.values():
+                return 0
+            return sum(find_sum(x, ignore) for x in json_doc.values())
         else:
             return 0
     return 0
@@ -58,6 +60,7 @@ def main():
     json_doc = json.loads(fileinput.input().readline())
 
     print(find_sum(json_doc))
+    print(find_sum(json_doc, True))
 
 
 if __name__ == "__main__":
