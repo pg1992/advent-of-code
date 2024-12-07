@@ -5,11 +5,18 @@ import re
 
 
 def main():
-    p = re.compile(r'mul\(\d+,\d+\)')
+    process = True
+    p = re.compile(r"mul\(\d+,\d+\)|do\(\)|don't\(\)")
     s = 0
     for line in fileinput.input():
-        nums = [op[4:-1].split(',') for op in p.findall(line)]
-        s += sum(int(x) * int(y) for x, y in nums)
+        for token in p.findall(line):
+            if token == "do()":
+                process = True
+            elif token == "don't()":
+                process = False
+            elif process:
+                nums = [int(n) for n in token[4:-1].split(',')]
+                s += nums[0] * nums[1]
     print(s)
 
 
