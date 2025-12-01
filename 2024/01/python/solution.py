@@ -4,8 +4,8 @@ import fileinput
 
 
 def main():
-    ll = []
-    rl = []
+    ll: list[int] = []
+    rl: list[int] = []
     for line in fileinput.input():
         x, y = line.split()
         ll.append(int(x))
