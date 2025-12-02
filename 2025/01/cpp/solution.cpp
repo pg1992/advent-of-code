@@ -12,23 +12,24 @@ int main()
 
     while (fin >> dir >> num)
     {
-        int old_pos { pos };
-        int revs { num / 100 };
-        int rem { num % 100 };
-
-        count_cross += revs;
-
         if (dir == 'R')
         {
-            if (pos + rem >= 100)
-                count_cross++;
-            pos = (pos + rem) % 100;
+            // for loop is the worst solution... but solves part 2
+            for (int i = 0; i < num; i++)
+            {
+                pos = (pos + 1) % 100;
+                if (pos == 0)
+                    count_cross++;
+            }
         }
         else
         {
-            if (pos - rem <= 0)
-                count_cross++;
-            pos = ((pos - rem) % 100 + 100) % 100;  // positive modulo
+            for (int i = 0; i < num; i++)
+            {
+                pos = ((pos - 1) % 100 + 100) % 100;
+                if (pos == 0)
+                    count_cross++;
+            }
         }
         if (pos == 0)
             count++;
